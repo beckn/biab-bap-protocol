@@ -1,0 +1,11 @@
+package org.beckn.one.sandbox.bap.message.entities
+
+import org.beckn.one.sandbox.bap.Default
+
+data class ProviderDao @Default constructor(
+  val id: String? = null,
+  val descriptor: DescriptorDao? = null,
+  val time: TimeDao? = null,
+  val locations: List<LocationDao>? = null,
+  val tags: Map<String, String>? = null
+)

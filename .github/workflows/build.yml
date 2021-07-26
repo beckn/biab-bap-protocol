@@ -1,0 +1,67 @@
+name: build
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: [ self-hosted, linux ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build with Gradle
+        run: ./gradlew clean build
+      - name: Cleanup Gradle Cache
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
+
+  deploy:
+    name: package and deploy the service
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: [ self-hosted, linux ]
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build docker image
+        uses: docker/build-push-action@v2
+        with:
+          load: true
+          context: .
+          push: false
+          tags: 795151977897.dkr.ecr.ap-south-1.amazonaws.com/beckn_one_sandbox_bap_protocol:${{ github.run_number }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+      - name: Cache growth workaround
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      - name: Push image to ECR
+        env:
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 795151977897.dkr.ecr.ap-south-1.amazonaws.com
+          docker push 795151977897.dkr.ecr.ap-south-1.amazonaws.com/beckn_one_sandbox_bap_protocol:${GITHUB_RUN_NUMBER}
+          docker rmi -f 795151977897.dkr.ecr.ap-south-1.amazonaws.com/beckn_one_sandbox_bap_protocol:${GITHUB_RUN_NUMBER}
+      - name: Deploying to the BAP servers qa using ansible
+        run: |
+          cd ansible
+          export ANSIBLE_ROLES_PATH=./roles
+          echo bap_build_no: ${GITHUB_RUN_NUMBER} >> vars/vars.yml
+          /home/ubuntu/.local/bin/ansible-playbook playbooks/beckn_services.yml -i inventory/qa.ini --extra-vars "@vars/vars.yml"
