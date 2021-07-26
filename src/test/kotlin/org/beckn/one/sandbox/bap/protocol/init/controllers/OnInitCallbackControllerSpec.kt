@@ -37,7 +37,7 @@ internal class OnInitCallbackControllerSpec @Autowired constructor(
   @Autowired
   private val onInitResponseRepo: BecknResponseRepository<OnInitDao>,
 ) : DescribeSpec() {
-  private val postOnInitUrl = "/v1/on_init"
+  private val postOnInitUrl = "/protocol/v1/on_init"
 
   val onInitResponse = ProtocolOnInit(
     context = ProtocolContextFactory.fixed,

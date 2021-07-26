@@ -16,7 +16,7 @@ class OnSelectCallbackController(
 ) : AbstractCallbackController<ProtocolOnSelect>(store) {
 
   @PostMapping(
-    "v1/on_select",
+    "protocol/v1/on_select",
     consumes = [MediaType.APPLICATION_JSON_VALUE],
     produces = [MediaType.APPLICATION_JSON_VALUE],
   )

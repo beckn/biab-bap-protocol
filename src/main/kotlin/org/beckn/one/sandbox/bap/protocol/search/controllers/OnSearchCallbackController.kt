@@ -14,7 +14,7 @@ class OnSearchCallbackController(
 ): AbstractCallbackController<ProtocolOnSearch>(store) {
 
   @PostMapping(
-    "v1/on_search",
+    "protocol/v1/on_search",
     consumes = [MediaType.APPLICATION_JSON_VALUE],
     produces = [MediaType.APPLICATION_JSON_VALUE],
   )

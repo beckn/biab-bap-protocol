@@ -37,7 +37,7 @@ internal class OnSearchCallbackControllerSpec @Autowired constructor(
   @Autowired
   private val searchResponseRepo: BecknResponseRepository<OnSearchDao>,
 ) : DescribeSpec() {
-  private val postOnSearchUrl = "/v1/on_search"
+  private val postOnSearchUrl = "/protocol/v1/on_search"
 
   val schemaSearchResponse = ProtocolOnSearch(
     context = ProtocolContextFactory.fixed,

@@ -15,7 +15,7 @@ class PollSearchResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ): AbstractPollForResponseController<ProtocolOnSearch>(responseService, contextFactory) {
 
-  @RequestMapping("/v1/on_search")
+  @RequestMapping("protocol/v1/on_search")
   @ResponseBody
   fun getSearchResponses(messageId: String) = findResponses(messageId)
 

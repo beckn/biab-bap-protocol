@@ -15,7 +15,7 @@ class OnTrackController(store: ResponseStorageService<ProtocolOnTrack>) :
   AbstractCallbackController<ProtocolOnTrack>(store) {
 
   @PostMapping(
-    "v1/on_track",
+    "protocol/v1/on_track",
     consumes = [MediaType.APPLICATION_JSON_VALUE],
     produces = [MediaType.APPLICATION_JSON_VALUE],
   )

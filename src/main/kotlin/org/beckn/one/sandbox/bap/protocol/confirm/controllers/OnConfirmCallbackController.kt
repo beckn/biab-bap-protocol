@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping
 class OnConfirmCallbackController(
   store: ResponseStorageService<ProtocolOnConfirm>
 ): AbstractCallbackController<ProtocolOnConfirm>(store) {
 
   @PostMapping(
-    "v1/on_confirm",
+    "protocol/v1/on_confirm",
     consumes = [MediaType.APPLICATION_JSON_VALUE],
     produces = [MediaType.APPLICATION_JSON_VALUE],
   )

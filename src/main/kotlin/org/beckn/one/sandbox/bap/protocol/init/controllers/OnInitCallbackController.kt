@@ -16,7 +16,7 @@ class OnInitCallbackController(
 ): AbstractCallbackController<ProtocolOnInit>(store) {
 
   @PostMapping(
-    "v1/on_init",
+    "protocol/v1/on_init",
     consumes = [MediaType.APPLICATION_JSON_VALUE],
     produces = [MediaType.APPLICATION_JSON_VALUE],
   )

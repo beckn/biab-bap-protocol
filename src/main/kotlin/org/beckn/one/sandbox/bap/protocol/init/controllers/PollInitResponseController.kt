@@ -15,7 +15,7 @@ class PollInitResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ): AbstractPollForResponseController<ProtocolOnInit>(responseService, contextFactory) {
 
-  @RequestMapping("/v1/on_init")
+  @RequestMapping("protocol//v1/on_init")
   @ResponseBody
   fun getInitResponses(messageId: String) = findResponses(messageId)
 

@@ -37,7 +37,7 @@ internal class OnTrackControllerSpec @Autowired constructor(
   @Autowired
   private val onTrackResponseRepo: BecknResponseRepository<OnTrackDao>,
 ) : DescribeSpec() {
-  private val postOnTrackUrl = "/v1/on_track"
+  private val postOnTrackUrl = "/protocol/v1/on_track"
   val onTrackResponse = ProtocolOnTrack(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnTrackMessage(

@@ -38,7 +38,7 @@ internal class OnConfirmCallbackControllerSpec @Autowired constructor(
   @Autowired
   private val onConfirmResponseRepo: BecknResponseRepository<OnConfirmDao>,
 ) : DescribeSpec() {
-  private val postOnConfirmUrl = "/v1/on_confirm"
+  private val postOnConfirmUrl = "/protocol/v1/on_confirm"
 
   val onConfirmResponse = ProtocolOnConfirm(
     context = ProtocolContextFactory.fixed,

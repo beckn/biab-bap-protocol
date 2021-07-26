@@ -15,7 +15,7 @@ class PollConfirmResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ): AbstractPollForResponseController<ProtocolOnConfirm>(responseService, contextFactory) {
 
-  @RequestMapping("/v1/on_confirm")
+  @RequestMapping("protocol/v1/on_confirm")
   @ResponseBody
   fun getConfirmResponses(messageId: String) = findResponses(messageId)
 

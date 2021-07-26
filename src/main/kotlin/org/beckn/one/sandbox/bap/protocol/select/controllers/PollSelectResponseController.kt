@@ -15,7 +15,7 @@ class PollSelectResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ): AbstractPollForResponseController<ProtocolOnSelect>(responseService, contextFactory) {
 
-  @RequestMapping("/v1/on_select")
+  @RequestMapping("protocol/v1/on_select")
   @ResponseBody
   fun getSelectResponses(messageId: String) = findResponses(messageId)
 

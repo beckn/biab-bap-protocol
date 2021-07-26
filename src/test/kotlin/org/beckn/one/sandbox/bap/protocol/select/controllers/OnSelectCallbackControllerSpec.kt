@@ -37,7 +37,7 @@ internal class OnSelectCallbackControllerSpec @Autowired constructor(
   @Autowired
   private val onSelectResponseRepo: BecknResponseRepository<OnSelectDao>,
 ) : DescribeSpec() {
-  private val postOnSelectUrl = "/v1/on_select"
+  private val postOnSelectUrl = "/protocol/v1/on_select"
   val onSelectResponse = ProtocolOnSelect(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnSelectMessage(
