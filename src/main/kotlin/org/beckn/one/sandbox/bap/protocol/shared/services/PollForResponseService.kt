@@ -17,9 +17,7 @@ open class PollForResponseService<Protocol: ProtocolResponse> constructor(
 
   open fun findResponses(messageId: String): Either<HttpError, List<Protocol>> {
     log.info("Got fetch request for message id: {}", messageId)
-    return messageService
-      .findById(messageId)
-      .flatMap { responseStorageService.findByMessageId(messageId) }
+    return responseStorageService.findByMessageId(messageId)
   }
 
 }
