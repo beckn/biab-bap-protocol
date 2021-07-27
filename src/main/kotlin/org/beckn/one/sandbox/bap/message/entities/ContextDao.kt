@@ -2,7 +2,7 @@ package org.beckn.one.sandbox.bap.message.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.beckn.one.sandbox.bap.Default
+import org.beckn.protocol.schemas.Default
 import java.time.Clock
 import java.time.OffsetDateTime
 

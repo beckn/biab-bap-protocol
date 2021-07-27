@@ -1,6 +1,6 @@
 package org.beckn.one.sandbox.bap.message.entities
 
-import org.beckn.one.sandbox.bap.Default
+import org.beckn.protocol.schemas.Default
 
 
 interface BecknResponseDao {

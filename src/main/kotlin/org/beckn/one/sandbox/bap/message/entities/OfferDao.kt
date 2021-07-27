@@ -1,6 +1,8 @@
 package org.beckn.one.sandbox.bap.message.entities
 
-data class OfferDao (
+import org.beckn.protocol.schemas.Default
+
+data class OfferDao @Default constructor(
   val id: String? = null,
   val descriptor: DescriptorDao? = null,
   val locationIds: List<String>? = null,
