@@ -81,3 +81,14 @@ class DateMapper {
     return offset?.toInstant()
   }
 }
+
+@Mapper(
+  componentModel = "spring",
+  unmappedTargetPolicy = ReportingPolicy.WARN,
+  injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+  uses = [DateMapper::class]
+)
+interface OnSupportResponseMapper : GenericResponseMapper<ProtocolOnSupport, OnSupportDao> {
+  override fun entityToProtocol(entity: OnSupportDao): ProtocolOnSupport
+  override fun protocolToEntity(schema: ProtocolOnSupport): OnSupportDao
+}

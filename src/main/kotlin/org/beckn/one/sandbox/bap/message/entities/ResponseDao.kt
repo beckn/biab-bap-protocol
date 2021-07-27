@@ -57,3 +57,15 @@ data class OnTrackDao @Default constructor(
 data class OnTrackMessageDao @Default constructor(
   val tracking: OnTrackMessageTrackingDao? = null
 )
+
+data class OnSupportDao @Default constructor(
+  override val context: ContextDao,
+  val message: OnSupportMessageDao? = null,
+  override val error: ErrorDao? = null
+) : BecknResponseDao
+
+data class OnSupportMessageDao @Default constructor(
+  val phone: String? = null,
+  val email: String? = null,
+  val uri: String? = null
+)

@@ -47,6 +47,12 @@ class ProtocolServicesConfiguration {
   ): ResponseStorageService<ProtocolOnTrack> = ResponseStorageServiceImpl(responseRepo, mapper)
 
   @Bean
+  fun onSupportStorageService(
+    @Autowired responseRepo: BecknResponseRepository<OnSupportDao>,
+    @Autowired mapper: GenericResponseMapper<ProtocolOnSupport, OnSupportDao>
+  ): ResponseStorageService<ProtocolOnSupport> = ResponseStorageServiceImpl(responseRepo, mapper)
+
+  @Bean
   fun pollForSearchResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnSearch>
@@ -74,5 +80,11 @@ class ProtocolServicesConfiguration {
   fun pollForConfirmResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnConfirm>
+  ) = PollForResponseService(messageService, responseStorageService)
+
+  @Bean
+  fun pollForSupportResponseService(
+    messageService: MessageService,
+    responseStorageService: ResponseStorageService<ProtocolOnSupport>
   ) = PollForResponseService(messageService, responseStorageService)
 }

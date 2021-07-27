@@ -50,4 +50,8 @@ class DatabaseConfiguration @Autowired constructor(
   @Bean
   fun onTrackResponseRepo(@Autowired database: MongoDatabase): BecknResponseRepository<OnTrackDao> =
     BecknResponseRepository(database.getCollectionOfName("on_track"))
+
+  @Bean
+  fun onSupportResponseRepo(@Autowired database: MongoDatabase): BecknResponseRepository<OnSupportDao> =
+    BecknResponseRepository(database.getCollectionOfName("on_support"))
 }
