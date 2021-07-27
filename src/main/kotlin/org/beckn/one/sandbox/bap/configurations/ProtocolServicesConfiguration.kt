@@ -59,6 +59,12 @@ class ProtocolServicesConfiguration {
   ) = PollForResponseService(messageService, responseStorageService)
 
   @Bean
+  fun pollForTrackResponseService(
+    messageService: MessageService,
+    responseStorageService: ResponseStorageService<ProtocolOnTrack>
+  ) = PollForResponseService(messageService, responseStorageService)
+
+  @Bean
   fun pollForSelectResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnSelect>
