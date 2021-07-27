@@ -24,10 +24,15 @@
     - Systemctl Enable Service
     - Restart Service
 
+- name: Create Service directory
+  file:
+    path: "{{ service_dir }}"
+    state: directory
+
 - name: Substitute application properties
   template:
     src: "../../../../src/main/resources/application.yml.j2"
-    dest: "{{ user_dir }}/application.yml"
+    dest: "{{ service_dir }}/application.yml"
     backup: yes
 
 - name: Cleanup older docker images

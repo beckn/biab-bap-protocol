@@ -10,5 +10,5 @@
     service_description: BAP Protocol Service
     service_port: 9002
     expose_ports: -p {{ service_port }}:{{ service_port }}
-    mount_points: -v {{ user_dir }}/application.yml:/usr/local/lib/application.yml
+    mount_points: -v {{ service_dir }}/application.yml:/usr/local/lib/application.yml
   tags: deploy_beckn_one_sandbox_bap_protocol
