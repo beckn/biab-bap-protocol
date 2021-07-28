@@ -43,7 +43,6 @@ class ResponseStorageServiceImpl<Proto : ProtocolResponse, Entity : BecknRespons
     }
 
   private fun toSchema(allResponses: List<Entity>) =
-    allResponses.mapNotNull { response ->
-      if (response.error == null) mapper.entityToProtocol(response) else null
-    }
+    allResponses.map { response -> mapper.entityToProtocol(response) }
+
 }
