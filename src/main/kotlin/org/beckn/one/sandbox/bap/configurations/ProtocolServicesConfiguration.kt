@@ -53,21 +53,15 @@ class ProtocolServicesConfiguration {
   ): ResponseStorageService<ProtocolOnSupport> = ResponseStorageServiceImpl(responseRepo, mapper)
 
   @Bean
+  fun onRatingStorageService(
+    @Autowired responseRepo: BecknResponseRepository<OnRatingDao>,
+    @Autowired mapper: GenericResponseMapper<ProtocolOnRating, OnRatingDao>,
+  ): ResponseStorageService<ProtocolOnRating> = ResponseStorageServiceImpl(responseRepo, mapper)
+
+  @Bean
   fun pollForSearchResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnSearch>
-  ) = PollForResponseService(messageService, responseStorageService)
-
-  @Bean
-  fun pollForInitResponseService(
-    messageService: MessageService,
-    responseStorageService: ResponseStorageService<ProtocolOnInit>
-  ) = PollForResponseService(messageService, responseStorageService)
-
-  @Bean
-  fun pollForTrackResponseService(
-    messageService: MessageService,
-    responseStorageService: ResponseStorageService<ProtocolOnTrack>
   ) = PollForResponseService(messageService, responseStorageService)
 
   @Bean
@@ -77,14 +71,32 @@ class ProtocolServicesConfiguration {
   ) = PollForResponseService(messageService, responseStorageService)
 
   @Bean
+  fun pollForInitResponseService(
+    messageService: MessageService,
+    responseStorageService: ResponseStorageService<ProtocolOnInit>
+  ) = PollForResponseService(messageService, responseStorageService)
+
+  @Bean
   fun pollForConfirmResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnConfirm>
   ) = PollForResponseService(messageService, responseStorageService)
 
   @Bean
+  fun pollForTrackResponseService(
+    messageService: MessageService,
+    responseStorageService: ResponseStorageService<ProtocolOnTrack>
+  ) = PollForResponseService(messageService, responseStorageService)
+
+  @Bean
   fun pollForSupportResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnSupport>
+  ) = PollForResponseService(messageService, responseStorageService)
+
+  @Bean
+  fun pollForRatingResponseService(
+    messageService: MessageService,
+    responseStorageService: ResponseStorageService<ProtocolOnRating>
   ) = PollForResponseService(messageService, responseStorageService)
 }

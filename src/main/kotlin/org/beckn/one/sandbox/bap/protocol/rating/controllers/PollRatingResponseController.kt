@@ -1,21 +1,21 @@
-package org.beckn.one.sandbox.bap.protocol.fulfillment.track.controllers
+package org.beckn.one.sandbox.bap.protocol.rating.controllers
 
 import org.beckn.one.sandbox.bap.protocol.shared.controllers.AbstractPollForResponseController
 import org.beckn.one.sandbox.bap.protocol.shared.services.PollForResponseService
 import org.beckn.one.sandbox.bap.schemas.factories.ContextFactory
-import org.beckn.protocol.schemas.ProtocolOnTrack
+import org.beckn.protocol.schemas.ProtocolOnRating
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class PollTrackResponseController @Autowired constructor(
-  responseService: PollForResponseService<ProtocolOnTrack>,
+class PollRatingResponseController @Autowired constructor(
+  responseService: PollForResponseService<ProtocolOnRating>,
   contextFactory: ContextFactory
-) : AbstractPollForResponseController<ProtocolOnTrack>(responseService, contextFactory) {
+) : AbstractPollForResponseController<ProtocolOnRating>(responseService, contextFactory) {
 
-  @RequestMapping("protocol/v1/on_track")
+  @RequestMapping("protocol/v1/on_rating")
   @ResponseBody
   fun getTrackResponses(messageId: String) = findResponses(messageId)
 

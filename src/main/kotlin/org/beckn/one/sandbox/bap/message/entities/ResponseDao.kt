@@ -69,3 +69,13 @@ data class OnSupportMessageDao @Default constructor(
   val email: String? = null,
   val uri: String? = null
 )
+
+data class OnRatingDao @Default constructor(
+  override val context: ContextDao,
+  val message: OnRatingMessageDao? = null,
+  override val error: ErrorDao? = null
+) : BecknResponseDao
+
+data class OnRatingMessageDao @Default constructor(
+  val feedback: OnRatingMessageFeedbackDao? = null
+)

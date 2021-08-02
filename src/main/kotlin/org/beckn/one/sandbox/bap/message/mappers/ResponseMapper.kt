@@ -71,17 +71,6 @@ interface OnTrackResponseMapper : GenericResponseMapper<ProtocolOnTrack, OnTrack
   override fun protocolToEntity(schema: ProtocolOnTrack): OnTrackDao
 }
 
-@Component
-class DateMapper {
-  fun map(instant: Instant?): OffsetDateTime? {
-    return instant?.let { OffsetDateTime.ofInstant(it, ZoneId.of("UTC")) }
-  }
-
-  fun map(offset: OffsetDateTime?): Instant? {
-    return offset?.toInstant()
-  }
-}
-
 @Mapper(
   componentModel = "spring",
   unmappedTargetPolicy = ReportingPolicy.WARN,
@@ -91,4 +80,26 @@ class DateMapper {
 interface OnSupportResponseMapper : GenericResponseMapper<ProtocolOnSupport, OnSupportDao> {
   override fun entityToProtocol(entity: OnSupportDao): ProtocolOnSupport
   override fun protocolToEntity(schema: ProtocolOnSupport): OnSupportDao
+}
+
+@Mapper(
+  componentModel = "spring",
+  unmappedTargetPolicy = ReportingPolicy.WARN,
+  injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+  uses = [DateMapper::class]
+)
+interface OnRatingResponseMapper : GenericResponseMapper<ProtocolOnRating, OnRatingDao> {
+  override fun entityToProtocol(entity: OnRatingDao): ProtocolOnRating
+  override fun protocolToEntity(schema: ProtocolOnRating): OnRatingDao
+}
+
+@Component
+class DateMapper {
+  fun map(instant: Instant?): OffsetDateTime? {
+    return instant?.let { OffsetDateTime.ofInstant(it, ZoneId.of("UTC")) }
+  }
+
+  fun map(offset: OffsetDateTime?): Instant? {
+    return offset?.toInstant()
+  }
 }
