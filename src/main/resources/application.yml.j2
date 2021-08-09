@@ -21,6 +21,8 @@ database:
   mongo:
     url: mongodb://{{ mongo_host }}:{{ mongo_port }}
     name: {{ bap_mongo_name }}
+beckn:
+  security.enabled: false
 management:
   endpoints:
     web:
