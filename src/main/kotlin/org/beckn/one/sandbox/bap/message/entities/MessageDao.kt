@@ -20,7 +20,8 @@ data class MessageDao(
     Select,
     Init,
     Confirm,
-    Track
+    Track,
+    Cancel
   }
 }
 

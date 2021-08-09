@@ -1,4 +1,4 @@
-package org.beckn.one.sandbox.bap.protocol.shared.services
+package org.beckn.one.sandbox.bap.protocol.base.services
 
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.core.spec.style.DescribeSpec
