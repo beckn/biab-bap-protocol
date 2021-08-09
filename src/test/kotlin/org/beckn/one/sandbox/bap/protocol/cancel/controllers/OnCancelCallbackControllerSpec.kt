@@ -23,15 +23,18 @@ import org.springframework.test.context.TestPropertySource
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.ObjectMapper
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles(value = ["test"])
 @TestPropertySource(locations = ["/application-test.yml"])
-class OnCancelCallbackControllerSpec @Autowired constructor(
+internal class OnCancelCallbackControllerSpec @Autowired constructor(
+  @Autowired
   private val mockMvc: MockMvc,
+  @Autowired
   private val mapper: ObjectMapper,
+  @Autowired
   private val onCancelResponseRepo: BecknResponseRepository<OnCancelDao>
 ) : DescribeSpec() {
   private val postOnCancelUrl = "/protocol/v1/on_cancel"

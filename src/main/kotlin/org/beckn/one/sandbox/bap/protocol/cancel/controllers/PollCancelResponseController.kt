@@ -5,7 +5,7 @@ import org.beckn.one.sandbox.bap.protocol.shared.services.PollForResponseService
 import org.beckn.one.sandbox.bap.schemas.factories.ContextFactory
 import org.beckn.protocol.schemas.ProtocolOnCancel
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -15,7 +15,7 @@ class PollCancelResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ) : AbstractPollForResponseController<ProtocolOnCancel>(responseService, contextFactory) {
 
-  @RequestMapping("protocol/v1/on_cancel")
+  @GetMapping("protocol/v1/on_cancel")
   @ResponseBody
   fun getCancelResponses(messageId: String) = findResponses(messageId)
 }
