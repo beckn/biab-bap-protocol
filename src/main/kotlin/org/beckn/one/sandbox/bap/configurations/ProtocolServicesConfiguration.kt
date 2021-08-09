@@ -59,6 +59,12 @@ class ProtocolServicesConfiguration {
   ): ResponseStorageService<ProtocolOnRating> = ResponseStorageServiceImpl(responseRepo, mapper)
 
   @Bean
+  fun onCancelStorageService(
+    @Autowired responseRepo: BecknResponseRepository<OnCancelDao>,
+    @Autowired mapper: GenericResponseMapper<ProtocolOnCancel, OnCancelDao>
+  ): ResponseStorageService<ProtocolOnCancel> = ResponseStorageServiceImpl(responseRepo, mapper)
+
+  @Bean
   fun pollForSearchResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnSearch>
@@ -98,5 +104,11 @@ class ProtocolServicesConfiguration {
   fun pollForRatingResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnRating>
+  ) = PollForResponseService(messageService, responseStorageService)
+
+  @Bean
+  fun pollForCancelResponseService(
+    messageService: MessageService,
+    responseStorageService: ResponseStorageService<ProtocolOnCancel>
   ) = PollForResponseService(messageService, responseStorageService)
 }

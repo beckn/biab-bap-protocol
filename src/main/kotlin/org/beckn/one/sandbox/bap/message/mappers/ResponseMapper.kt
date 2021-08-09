@@ -103,3 +103,13 @@ class DateMapper {
     return offset?.toInstant()
   }
 }
+@Mapper(
+  componentModel = "spring",
+  unmappedTargetPolicy = ReportingPolicy.WARN,
+  injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+  uses = [DateMapper::class]
+)
+interface OnCancelResponseMapper: GenericResponseMapper<ProtocolOnCancel, OnCancelDao> {
+  override fun entityToProtocol(entity: OnCancelDao): ProtocolOnCancel
+  override fun protocolToEntity(schema: ProtocolOnCancel): OnCancelDao
+}

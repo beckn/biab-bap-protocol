@@ -79,3 +79,13 @@ data class OnRatingDao @Default constructor(
 data class OnRatingMessageDao @Default constructor(
   val feedback: OnRatingMessageFeedbackDao? = null
 )
+
+data class OnCancelDao @Default constructor(
+  override val context: ContextDao,
+  val message: OnCancelMessageDao? = null,
+  override val error: ErrorDao? = null
+) : BecknResponseDao
+
+data class OnCancelMessageDao @Default constructor(
+  val order: OrderDao? = null
+)
