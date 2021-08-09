@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody
 open class AbstractCallbackController<Protocol: ProtocolResponse> @Autowired constructor(
   private val storage: ResponseStorageService<Protocol>
 ) {
-  val log = LoggerFactory.getLogger(AbstractCallbackController::class.java)
+  private val log = LoggerFactory.getLogger(AbstractCallbackController::class.java)
 
   fun onCallback(@RequestBody callBackActionResponse: Protocol) = storage
     .save(callBackActionResponse)

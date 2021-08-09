@@ -72,7 +72,7 @@ internal class PollOnTrackResponseControllerSpec @Autowired constructor(
       context("when called for given message id") {
         val onTrackCall = mockMvc
           .perform(
-            MockMvcRequestBuilders.get("/protocol/v1/on_track")
+            MockMvcRequestBuilders.get("/protocol/response/v1/on_track")
               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
               .param("messageId", entityContext.messageId)
           )

@@ -71,7 +71,7 @@ internal class PollOnInitResponseControllerSpec @Autowired constructor(
       context("when called for given message id") {
         val onInitCall = mockMvc
           .perform(
-            MockMvcRequestBuilders.get("/protocol/v1/on_init")
+            MockMvcRequestBuilders.get("/protocol/response/v1/on_init")
               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
               .param("messageId", entityContext.messageId)
           )

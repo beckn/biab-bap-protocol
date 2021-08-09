@@ -71,7 +71,7 @@ internal class PollOnSearchResponseControllerSpec @Autowired constructor(
       context("when called for given message id") {
         val onSearchCall = mockMvc
           .perform(
-            MockMvcRequestBuilders.get("/protocol/v1/on_search")
+            MockMvcRequestBuilders.get("/protocol/response/v1/on_search")
               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
               .param("messageId", entityContext.messageId)
           )

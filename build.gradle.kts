@@ -21,12 +21,12 @@ allOpen {
 
 repositories {
   mavenCentral()
-  maven {
+  /*maven {
     url = uri("s3://beckn-maven-artifacts/releases")
     authentication {
       val awsIm by registering(AwsImAuthentication::class)
     }
-  }
+  }*/
   mavenLocal()
 }
 
@@ -49,6 +49,8 @@ dependencies {
   implementation("org.litote.kmongo:kmongo:4.2.8")
   implementation("org.mapstruct:mapstruct:1.4.2.Final")
   implementation("org.beckn.jvm:beckn-protocol-dtos:0.9.1.12")
+  implementation("org.bouncycastle:bcprov-jdk15on:1.69")
+  implementation("commons-codec:commons-codec:1.15")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.kotest:kotest-runner-junit5:4.4.3")

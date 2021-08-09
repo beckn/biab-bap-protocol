@@ -75,7 +75,7 @@ internal class PollOnConfirmResponseControllerSpec @Autowired constructor(
       context("when called for given message id") {
         val onConfirmCall = mockMvc
           .perform(
-            MockMvcRequestBuilders.get("/protocol/v1/on_confirm")
+            MockMvcRequestBuilders.get("/protocol/response/v1/on_confirm")
               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
               .param("messageId", entityContext.messageId)
           )

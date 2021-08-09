@@ -13,7 +13,7 @@ open class PollForResponseService<Protocol: ProtocolResponse> constructor(
   private val messageService: MessageService,
   private val responseStorageService: ResponseStorageService<Protocol>
 ) {
-  val log: Logger = LoggerFactory.getLogger(this::class.java)
+  private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
   open fun findResponses(messageId: String): Either<HttpError, List<Protocol>> {
     log.info("Got fetch request for message id: {}", messageId)

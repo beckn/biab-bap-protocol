@@ -3,7 +3,7 @@ package org.beckn.one.sandbox.bap.protocol.shared.security
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class CrypticTest : DescribeSpec() {
+class CrypticSpec : DescribeSpec() {
 
   private val b64PrivateKey = "8j0Menby6+O4kUkE2yDJw4u0pqWmAdlftsROXlbKHVGHlb0U6bkLc857vBBKHCL5TDsLxsw7mqJFI0cyC7/a8A=="
   private val b64PublicKey = "h5W9FOm5C3POe7wQShwi+Uw7C8bMO5qiRSNHMgu/2vA="
@@ -13,7 +13,7 @@ class CrypticTest : DescribeSpec() {
   private val sampleAuthorization = """
     Signature keyId="MOCK_SUB_ID|key1|xed25519" algorithm="xed25519" created="1627447288" expires="1627450888" headers="(created) (expires) digest" signature="hrEaAq8fpChrKBuevWTRu1dl2evXcoDjuaSPCg+olGXqnR3NA7NyqqQIJJ5m50beEzp/YOAxceATlPEYtaCiDg=="
   """.trimIndent()
-  private val authorization = Authorization.parse(sampleAuthorization)
+  private val authorization = Authorization.parse(sampleAuthorization)!!
 
   init {
     describe("Cryptic") {
@@ -28,7 +28,7 @@ class CrypticTest : DescribeSpec() {
       }
 
       it("should verify self generated signature") {
-        val selfAuthorization = authorization.copy(signature = Cryptic.sign(b64PrivateKey, sampleBody))
+        val selfAuthorization = authorization.copy(signature = Cryptic.sign(b64PrivateKey, sampleBody, 1627447288, 1627450888))
         Cryptic.verify(selfAuthorization, b64PublicKey, sampleBody) shouldBe true
       }
     }

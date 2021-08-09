@@ -21,6 +21,9 @@ database:
   mongo:
     url: mongodb://localhost:27017
     name: sandbox_bap
+beckn:
+  security.enabled: false
+
 management:
   endpoints:
     web:
