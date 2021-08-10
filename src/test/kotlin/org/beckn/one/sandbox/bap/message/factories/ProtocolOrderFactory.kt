@@ -5,7 +5,7 @@ import org.beckn.protocol.schemas.*
 import java.time.OffsetDateTime
 
 object ProtocolOrderFactory {
-  fun create(id: Int, numberOfItems: Int): ProtocolOrder {
+  fun create(id: Int): ProtocolOrder {
     val itemIds = IdFactory.forItems(IdFactory.forProvider(id), 3)
     return ProtocolOrder(
       provider = ProtocolSelectMessageSelectedProvider(

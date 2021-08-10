@@ -1,4 +1,4 @@
-package org.beckn.one.sandbox.bap.protocol.cancel.controllers
+package org.beckn.one.sandbox.bap.protocol.status.controllers
 
 import arrow.core.Either
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -13,7 +13,7 @@ import org.beckn.one.sandbox.bap.message.repositories.BecknResponseRepository
 import org.beckn.one.sandbox.bap.message.repositories.GenericRepository
 import org.beckn.one.sandbox.bap.protocol.shared.services.PollForResponseService
 import org.beckn.one.sandbox.bap.schemas.factories.ContextFactory
-import org.beckn.protocol.schemas.ProtocolOnCancel
+import org.beckn.protocol.schemas.ProtocolOnOrderStatus
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +25,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.time.Clock
 import java.time.Instant
 import java.time.OffsetDateTime
@@ -35,8 +35,8 @@ import java.time.ZoneId
 @AutoConfigureMockMvc
 @ActiveProfiles(value = ["test"])
 @TestPropertySource(locations = ["/application-test.yml"])
-internal class PollOnCancelResponseControllerSpec @Autowired constructor(
-  private val cancelResponseRepo: BecknResponseRepository<OnCancelDao>,
+internal class PollOnOrderStatusResponseControllerSpec @Autowired constructor(
+  private val orderStatusResponseRepo: BecknResponseRepository<OnOrderStatusDao>,
   private val messageRepository: GenericRepository<MessageDao>,
   private val contextFactory: ContextFactory,
   private val mapper: ObjectMapper,
@@ -50,7 +50,7 @@ internal class PollOnCancelResponseControllerSpec @Autowired constructor(
   private val entityContext = ContextDao(
     domain = "LocalRetail",
     country = "IN",
-    action = ContextDao.Action.CANCEL,
+    action = ContextDao.Action.STATUS,
     city = "Pune",
     coreVersion = "0.9.1-draft03",
     bapId = "http://host.bap.com",
@@ -64,55 +64,54 @@ internal class PollOnCancelResponseControllerSpec @Autowired constructor(
 
 
   init {
-    describe("PollOnCancelResponseController") {
-      cancelResponseRepo.clear()
-      messageRepository.insertOne(MessageDao(id = entityContext.messageId, type = MessageDao.Type.Cancel))
-      cancelResponseRepo.insertMany(onCancelResponse())
+    describe("PollOnOrderStatusResponseController") {
+      orderStatusResponseRepo.clear()
+      messageRepository.insertOne(MessageDao(id = entityContext.messageId, type = MessageDao.Type.Status))
+      orderStatusResponseRepo.insertMany(onOrderStatusResponse())
 
       context("when called for given message id") {
-        val onCancelCall = mockMvc
+        val onOrderStatusCall = mockMvc
           .perform(
-            MockMvcRequestBuilders.get("/protocol/v1/on_cancel")
+            MockMvcRequestBuilders.get("/protocol/response/v1/on_status")
               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
               .param("messageId", entityContext.messageId)
           )
 
         it("should respond with status ok") {
-          onCancelCall.andExpect(MockMvcResultMatchers.status().isOk)
+          onOrderStatusCall.andExpect(status().isOk)
         }
 
-        it("should respond with all Cancel responses in body") {
-          val results = onCancelCall.andReturn()
+        it("should respond with all order status responses in body") {
+          val results = onOrderStatusCall.andReturn()
           val body = results.response.contentAsString
-          val response: List<ProtocolOnCancel> = mapper.readValue(body)
+          val response: List<ProtocolOnOrderStatus> = mapper.readValue(body)
           response.size shouldBeExactly 2
           response.forEach { it.context.bppId shouldBe entityContext.bppId }
         }
       }
 
       context("when failure occurs during request processing") {
-        val mockOnCancelService = mock<PollForResponseService<ProtocolOnCancel>> {
+        val mockOnPollService = mock<PollForResponseService<ProtocolOnOrderStatus>> {
           onGeneric { findResponses(any()) }.thenReturn(Either.Left(DatabaseError.OnRead))
         }
-        val pollCancelResponseController = PollCancelResponseController(mockOnCancelService, contextFactory)
+        val pollOrderStatusResponseController = PollOrderStatusResponseController(mockOnPollService, contextFactory)
         it("should respond with failure") {
-          val response = pollCancelResponseController.findResponses(entityContext.messageId)
+          val response = pollOrderStatusResponseController.findResponses(entityContext.messageId)
           response.statusCode shouldBe DatabaseError.OnRead.status()
         }
       }
     }
   }
 
-  fun onCancelResponse(): List<OnCancelDao> {
-    val order = ProtocolOrderFactory.create(1)
-    val entityCancelResponse = OnCancelDao(
+  fun onOrderStatusResponse(): List<OnOrderStatusDao> {
+    val entityOrderStatusResponse = OnOrderStatusDao(
       context = entityContext,
-      message = OnCancelMessageDao(ProtocolOrderFactory.createAsEntity(order))
+      message = OnOrderStatusMessageDao(order = ProtocolOrderFactory.createAsEntity(ProtocolOrderFactory.create(1)))
     )
     return listOf(
-      entityCancelResponse,
-      entityCancelResponse,
-      entityCancelResponse.copy(context = entityContext.copy(messageId = "123"))
+      entityOrderStatusResponse,
+      entityOrderStatusResponse,
+      entityOrderStatusResponse.copy(context = entityContext.copy(messageId = "463"))
     )
   }
 }

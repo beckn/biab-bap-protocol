@@ -107,7 +107,7 @@ internal class PollOnConfirmResponseControllerSpec @Autowired constructor(
   }
 
   fun onConfirmResponse(): List<OnConfirmDao> {
-    val order = ProtocolOrderFactory.create(1, 2)
+    val order = ProtocolOrderFactory.create(1)
     val entityConfirmResponse = OnConfirmDao(
       context = entityContext,
       message = OnConfirmMessageDao(ProtocolOrderFactory.createAsEntity(order))

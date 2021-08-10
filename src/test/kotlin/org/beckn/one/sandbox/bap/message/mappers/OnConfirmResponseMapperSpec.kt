@@ -23,7 +23,7 @@ class OnConfirmResponseMapperSpec @Autowired constructor(
   private val protocolResponse = ProtocolOnConfirm(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnConfirmMessage(
-      ProtocolOrderFactory.create(1, 2)
+      ProtocolOrderFactory.create(1)
     )
   )
 

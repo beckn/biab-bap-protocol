@@ -117,4 +117,10 @@ class ProtocolServicesConfiguration {
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnCancel>
   ) = PollForResponseService(messageService, responseStorageService)
+
+  @Bean
+  fun pollForOrderStatusResponseService(
+    messageService: MessageService,
+    responseStorageService: ResponseStorageService<ProtocolOnOrderStatus>
+  ) = PollForResponseService(messageService, responseStorageService)
 }

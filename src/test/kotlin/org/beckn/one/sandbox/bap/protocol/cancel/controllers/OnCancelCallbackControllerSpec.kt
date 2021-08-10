@@ -42,7 +42,7 @@ internal class OnCancelCallbackControllerSpec @Autowired constructor(
   val onCancelResponse = ProtocolOnCancel(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnCancelMessage(
-      order = ProtocolOrderFactory.create(1, 2)
+      order = ProtocolOrderFactory.create(1)
     )
   )
 

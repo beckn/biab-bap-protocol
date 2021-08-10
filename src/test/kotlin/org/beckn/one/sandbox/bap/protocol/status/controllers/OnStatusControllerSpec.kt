@@ -36,7 +36,7 @@ internal class OnStatusControllerSpec @Autowired constructor(
   private val postOnStatusUrl = "/protocol/v1/on_status"
   val onStatusResponse = ProtocolOnOrderStatus(
     context = ProtocolContextFactory.fixed,
-    message = ProtocolOnOrderStatusMessage(order = ProtocolOrderFactory.create(1, 2))
+    message = ProtocolOnOrderStatusMessage(order = ProtocolOrderFactory.create(1))
   )
 
   init {

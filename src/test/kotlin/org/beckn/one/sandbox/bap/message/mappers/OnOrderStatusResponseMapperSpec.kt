@@ -23,7 +23,7 @@ class OnOrderStatusResponseMapperSpec @Autowired constructor(
   private val protocolResponse = ProtocolOnOrderStatus(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnOrderStatusMessage(
-      order = ProtocolOrderFactory.create(1, 2)
+      order = ProtocolOrderFactory.create(1)
     )
   )
 

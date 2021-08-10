@@ -21,7 +21,8 @@ data class MessageDao(
     Init,
     Confirm,
     Track,
-    Cancel
+    Cancel,
+    Status,
   }
 }
 

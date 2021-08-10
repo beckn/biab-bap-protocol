@@ -4,7 +4,6 @@ import arrow.core.Either
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.shouldBe
 import org.beckn.one.sandbox.bap.errors.database.DatabaseError
 import org.beckn.one.sandbox.bap.message.entities.OnConfirmDao
@@ -43,7 +42,7 @@ internal class OnConfirmCallbackControllerSpec @Autowired constructor(
   val onConfirmResponse = ProtocolOnConfirm(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnConfirmMessage(
-      order = ProtocolOrderFactory.create(1, 2)
+      order = ProtocolOrderFactory.create(1)
     )
   )
 

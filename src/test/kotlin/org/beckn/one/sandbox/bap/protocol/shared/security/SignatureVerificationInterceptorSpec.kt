@@ -185,7 +185,7 @@ class SignatureVerificationInterceptorSpec(
     describe("SignatureVerificationInterceptor for confirm callback APIs") {
       val schemaConfirmResponse = ProtocolOnConfirm(
         context = ProtocolContextFactory.fixed,
-        message = ProtocolOnConfirmMessage(ProtocolOrderFactory.create(1, 2))
+        message = ProtocolOnConfirmMessage(ProtocolOrderFactory.create(1))
       )
       val requestBody: String = mapper.writeValueAsString(schemaConfirmResponse)
 
