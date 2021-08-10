@@ -65,6 +65,12 @@ class ProtocolServicesConfiguration {
   ): ResponseStorageService<ProtocolOnCancel> = ResponseStorageServiceImpl(responseRepo, mapper)
 
   @Bean
+  fun onOrderStatusStorageService(
+    @Autowired responseRepo: BecknResponseRepository<OnOrderStatusDao>,
+    @Autowired mapper: GenericResponseMapper<ProtocolOnOrderStatus, OnOrderStatusDao>,
+  ): ResponseStorageService<ProtocolOnOrderStatus> = ResponseStorageServiceImpl(responseRepo, mapper)
+
+  @Bean
   fun pollForSearchResponseService(
     messageService: MessageService,
     responseStorageService: ResponseStorageService<ProtocolOnSearch>

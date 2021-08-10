@@ -89,3 +89,13 @@ data class OnCancelDao @Default constructor(
 data class OnCancelMessageDao @Default constructor(
   val order: OrderDao? = null
 )
+
+data class OnOrderStatusDao @Default constructor(
+  override val context: ContextDao,
+  val message: OnOrderStatusMessageDao? = null,
+  override val error: ErrorDao? = null
+) : BecknResponseDao
+
+data class OnOrderStatusMessageDao @Default constructor(
+  val order: OrderDao? = null
+)
