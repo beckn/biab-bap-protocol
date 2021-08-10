@@ -8,6 +8,7 @@ import org.beckn.one.sandbox.bap.message.entities.CatalogDao
 import org.beckn.one.sandbox.bap.message.entities.ContextDao
 import org.beckn.one.sandbox.bap.message.entities.OnSearchDao
 import org.beckn.one.sandbox.bap.message.entities.OnSearchMessageDao
+import org.beckn.one.sandbox.bap.message.factories.ProtocolCatalogFactory
 import org.springframework.boot.test.context.SpringBootTest
 import java.time.Clock
 import java.time.Instant

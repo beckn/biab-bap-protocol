@@ -1,10 +1,12 @@
 package org.beckn.one.sandbox.bap.protocol.shared.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.tomakehurst.wiremock.client.WireMock
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.nulls.beNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNot
+import org.beckn.one.sandbox.bap.common.factories.MockNetwork
 import org.beckn.one.sandbox.bap.message.factories.*
 import org.beckn.protocol.schemas.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +21,8 @@ import java.time.Instant
 
 @SpringBootTest(
   webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-  properties = ["beckn.security.enabled=true"])
+  properties = ["beckn.security.enabled=true"]
+)
 @ActiveProfiles(value = ["test"])
 class SignatureVerificationInterceptorSpec(
   @LocalServerPort port: Int,
@@ -32,9 +35,20 @@ class SignatureVerificationInterceptorSpec(
     {"message":{"ack":{"status":"NACK"}}}
     """.trimIndent()
 
-  init{
+  val registryApi = MockNetwork.registryBppLookupApi
 
-    fun createRequest(requestBody: String, authHeaderName: String? = null, authString: String? = null): HttpEntity<String> {
+  init {
+    registryApi.stubFor(
+      WireMock.post("/lookup")
+        .willReturn(WireMock.serverError())
+    )
+    registryApi.start()
+
+    fun createRequest(
+      requestBody: String,
+      authHeaderName: String? = null,
+      authString: String? = null
+    ): HttpEntity<String> {
       val headers = HttpHeaders()
       headers.contentType = MediaType.APPLICATION_JSON
       val hName = authHeaderName ?: return HttpEntity(requestBody, headers)
@@ -98,7 +112,11 @@ class SignatureVerificationInterceptorSpec(
       val requestBody: String = mapper.writeValueAsString(schemaSelectResponse)
 
       context("when Authorization header is missing in search request") {
-        val responseEntity = restTemplate.postForEntity("http://localhost:$port/protocol/v1/on_select", createRequest(requestBody), String::class.java)
+        val responseEntity = restTemplate.postForEntity(
+          "http://localhost:$port/protocol/v1/on_select",
+          createRequest(requestBody),
+          String::class.java
+        )
 
         it("should return 401") {
           responseEntity.statusCode.value() shouldBe 401
@@ -136,7 +154,8 @@ class SignatureVerificationInterceptorSpec(
 
       context("when Authorization header is missing in search request") {
         val responseEntity = restTemplate.postForEntity(
-          "http://localhost:$port/protocol/v1/on_init", createRequest(requestBody), String::class.java)
+          "http://localhost:$port/protocol/v1/on_init", createRequest(requestBody), String::class.java
+        )
 
         it("should return 401") {
           responseEntity.statusCode.value() shouldBe 401
@@ -172,7 +191,8 @@ class SignatureVerificationInterceptorSpec(
 
       context("when Authorization header is missing in search request") {
         val responseEntity = restTemplate.postForEntity(
-          "http://localhost:$port/protocol/v1/on_confirm", createRequest(requestBody), String::class.java)
+          "http://localhost:$port/protocol/v1/on_confirm", createRequest(requestBody), String::class.java
+        )
 
         it("should return 401") {
           responseEntity.statusCode.value() shouldBe 401
@@ -208,7 +228,8 @@ class SignatureVerificationInterceptorSpec(
 
       context("when Authorization header is missing in search request") {
         val responseEntity = restTemplate.postForEntity(
-          "http://localhost:$port/protocol/v1/on_track", createRequest(requestBody), String::class.java)
+          "http://localhost:$port/protocol/v1/on_track", createRequest(requestBody), String::class.java
+        )
 
         it("should return 401") {
           responseEntity.statusCode.value() shouldBe 401

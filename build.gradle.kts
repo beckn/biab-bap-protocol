@@ -51,6 +51,11 @@ dependencies {
   implementation("org.beckn.jvm:beckn-protocol-dtos:0.9.1.15")
   implementation("org.bouncycastle:bcprov-jdk15on:1.69")
   implementation("commons-codec:commons-codec:1.15")
+  implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+  implementation("com.squareup.retrofit2:converter-jackson:$retrofitVersion")
+  implementation("com.squareup.retrofit2:retrofit-mock:$retrofitVersion")
+  implementation("io.github.resilience4j:resilience4j-retrofit:1.7.1")
+  implementation("io.github.resilience4j:resilience4j-retry:1.7.1")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.kotest:kotest-runner-junit5:4.4.3")

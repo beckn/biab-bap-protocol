@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 class SecurityConfiguration(
-  @Autowired val keyStore: CrypticKeyStore,
+  @Autowired val keyStores: List<CrypticKeyStore>,
   @Autowired val env: Environment,
   @Autowired val objectMapper: ObjectMapper
 ) : WebMvcConfigurer {
@@ -25,10 +25,10 @@ class SecurityConfiguration(
   override fun addInterceptors(registry: InterceptorRegistry) {
     if (env.getProperty("beckn.security.enabled", Boolean::class.java, true)) {
       val proxyAuthInterceptor = SignatureVerificationInterceptor(
-        keyStore, listOf("Proxy-Authorization", "Authorization"), objectMapper
+        keyStores, listOf("Proxy-Authorization", "Authorization"), objectMapper
       )
       val authInterceptor = SignatureVerificationInterceptor(
-        keyStore, listOf("Authorization"),objectMapper
+        keyStores, listOf("Authorization"),objectMapper
       )
       registry.addInterceptor(proxyAuthInterceptor).addPathPatterns("/protocol/v1/on_search")
       registry.addInterceptor(authInterceptor)
