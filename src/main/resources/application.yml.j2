@@ -17,6 +17,7 @@ context:
   country: IND
   bap_id: box.beckn.org
   bap_uri: http://qa.api.box.beckn.org/bap/v1
+  ttl_seconds: 20
 database:
   mongo:
     url: mongodb://{{ mongo_host }}:{{ mongo_port }}
@@ -31,6 +32,11 @@ bpp_registry_service:
   url: https://demo4460370.mockable.io/bpp_registry/
 beckn:
   security.enabled: false
+security:
+  self:
+    private_key: {{ private_key }}
+    unique_key_id: key1
+    public_key: {{ public_key }}
 management:
   endpoints:
     web:

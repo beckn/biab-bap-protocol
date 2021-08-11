@@ -7,3 +7,8 @@ registry_service:
   url: http://localhost:4000/
 bpp_registry_service:
   url: http://localhost:4010/
+security:
+  self:
+    private_key: 8j0Menby6+O4kUkE2yDJw4u0pqWmAdlftsROXlbKHVGHlb0U6bkLc857vBBKHCL5TDsLxsw7mqJFI0cyC7/a8A==
+    public_key: h5W9FOm5C3POe7wQShwi+Uw7C8bMO5qiRSNHMgu/2vA=
+    unique_key_id: key1

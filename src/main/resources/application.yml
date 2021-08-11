@@ -17,12 +17,17 @@ context:
   country: IND
   bap_id: box.beckn.org
   bap_uri: http://qa.api.box.beckn.org/bap/v1
+  ttl_seconds: 20
 database:
   mongo:
     url: mongodb://localhost:27017
     name: sandbox_bap
 beckn:
   security.enabled: false
+security:
+  self:
+    private_key:
+    unique_key_id: key1
 registry_service:
   url: https://demo4460370.mockable.io/registry/
   retry:

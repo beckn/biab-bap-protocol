@@ -3,8 +3,10 @@ package org.beckn.one.sandbox.bap.configurations
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.github.resilience4j.retrofit.RetryCallAdapter
 import io.github.resilience4j.retry.Retry
+import okhttp3.OkHttpClient
 import org.beckn.one.sandbox.bap.protocol.external.registry.RegistryClient
 import org.beckn.one.sandbox.bap.protocol.shared.factories.RetryFactory
+import org.beckn.one.sandbox.bap.protocol.shared.security.SignRequestInterceptor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -27,7 +29,9 @@ class RegistryClientConfiguration(
   @Autowired @Value("\${bpp_registry_service.url}")
   private val bppRegistryServiceUrl: String,
   @Autowired
-  private val objectMapper: ObjectMapper
+  private val objectMapper: ObjectMapper,
+  @Autowired
+  private val interceptor: SignRequestInterceptor
 ) {
   private val retry: Retry = RetryFactory.create(
     "RegistryClient",
@@ -39,8 +43,10 @@ class RegistryClientConfiguration(
   @Bean
   @Primary
   fun registryServiceClient(): RegistryClient {
+    val okHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
     val retrofit = Retrofit.Builder()
       .baseUrl(registryServiceUrl)
+      .client(okHttpClient)
       .addConverterFactory(JacksonConverterFactory.create(objectMapper))
       .addCallAdapterFactory(RetryCallAdapter.of(retry))
       .build()

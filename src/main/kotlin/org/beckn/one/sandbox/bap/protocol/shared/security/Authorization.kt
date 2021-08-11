@@ -4,7 +4,7 @@ import java.time.Instant
 
 data class Authorization(
   val keyId: String,
-  val algorithm: String = "xed25519",
+  val algorithm: String = XED25519,
   val created: Long,
   val expires: Long,
   val headers: String = "(created) (expires) digest",
@@ -29,6 +29,9 @@ data class Authorization(
     private const val EXPIRES = "expires"
     private const val HEADERS = "headers"
     private const val SIGNATURE = "signature"
+
+    private const val XED25519 = "xed25519"
+    const val HEADER_NAME = "Authorization"
 
     fun parse(auth: String?): Authorization? {
       return auth?.let { authStr ->
@@ -56,6 +59,19 @@ data class Authorization(
           signature = signature
         )
       }
+    }
+
+    fun create(subscriberId: String,
+               uniqueKeyId: String,
+               signature: String,
+               created: Long,
+               expires: Long): Authorization {
+      return Authorization(
+        keyId = "$subscriberId|$uniqueKeyId|$XED25519",
+        created = created,
+        expires =  expires,
+        signature = signature
+      )
     }
   }
 }
