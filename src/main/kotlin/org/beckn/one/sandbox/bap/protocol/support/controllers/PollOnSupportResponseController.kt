@@ -15,7 +15,7 @@ class PollOnSupportResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ) : AbstractPollForResponseController<ProtocolOnSupport>(responseService, contextFactory) {
 
-  @RequestMapping("protocol/v1/on_support")
+  @RequestMapping("protocol/response/v1/on_support")
   @ResponseBody
   fun getSupportResponses(messageId: String) = findResponses(messageId)
 

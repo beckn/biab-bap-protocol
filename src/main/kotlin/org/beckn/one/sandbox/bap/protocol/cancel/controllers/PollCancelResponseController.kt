@@ -15,7 +15,7 @@ class PollCancelResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ) : AbstractPollForResponseController<ProtocolOnCancel>(responseService, contextFactory) {
 
-  @GetMapping("protocol/v1/on_cancel")
+  @GetMapping("protocol/response/v1/on_cancel")
   @ResponseBody
   fun getCancelResponses(messageId: String) = findResponses(messageId)
 }

@@ -72,7 +72,7 @@ internal class PollOnCancelResponseControllerSpec @Autowired constructor(
       context("when called for given message id") {
         val onCancelCall = mockMvc
           .perform(
-            MockMvcRequestBuilders.get("/protocol/v1/on_cancel")
+            MockMvcRequestBuilders.get("/protocol/response/v1/on_cancel")
               .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
               .param("messageId", entityContext.messageId)
           )
