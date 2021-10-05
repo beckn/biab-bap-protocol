@@ -86,7 +86,7 @@ internal class PollOnTrackResponseControllerSpec @Autowired constructor(
           val body = results.response.contentAsString
           val response: List<ProtocolOnTrack> = mapper.readValue(body)
           response.size shouldBeExactly 2
-          response.forEach { it.context.bppId shouldBe entityContext.bppId }
+          response.forEach { it.context!!.bppId shouldBe entityContext.bppId }
         }
       }
 

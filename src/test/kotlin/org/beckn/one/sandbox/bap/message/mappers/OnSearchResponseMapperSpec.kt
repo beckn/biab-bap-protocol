@@ -39,7 +39,7 @@ class OnSearchResponseMapperSpec @Autowired constructor(
     message = OnSearchMessageDao(
       ProtocolCatalogFactory.createAsEntity(protocolSearchResponse.message?.catalog)
     ),
-    context = ProtocolContextFactory.fixedAsEntity(protocolSearchResponse.context)
+    context = ProtocolContextFactory.fixedAsEntity(protocolSearchResponse.context!!)
   )
   init {
     describe("SearchResponseMapper") {

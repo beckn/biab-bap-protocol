@@ -28,9 +28,9 @@ class OnConfirmResponseMapperSpec @Autowired constructor(
   )
 
   private val entityResponse = OnConfirmDao(
-    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context),
+    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context!!),
     message = OnConfirmMessageDao(
-      ProtocolOrderFactory.createAsEntity(protocolResponse.message?.order)
+      ProtocolOrderFactory.createAsEntity(protocolResponse.message.order)
     )
   )
   init {

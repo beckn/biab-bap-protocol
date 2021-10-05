@@ -25,8 +25,6 @@ object ProtocolQuotationFactory {
 object ProtocolQuotationBreakupFactory {
 
   private fun create(id: String, type: ProtocolQuotationBreakup.Type) = ProtocolQuotationBreakup(
-    type = type,
-    refId = id,
     price = ProtocolPriceFactory.create()
   )
 
@@ -37,8 +35,6 @@ object ProtocolQuotationBreakupFactory {
 
   fun createAsEntity(protocol: ProtocolQuotationBreakup?) = protocol?.let {
     QuotationBreakupDao(
-      type = QuotationBreakupDao.Type.values().first { it.value == protocol.type?.value },
-      refId = protocol.refId,
       price = ProtocolPriceFactory.createAsEntity(protocol.price)
     )
   }

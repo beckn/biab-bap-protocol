@@ -11,7 +11,6 @@ data class FulfillmentDao  @Default constructor(
   val vehicle: VehicleDao? = null,
   val start: FulfillmentStartDao? = null,
   val end: FulfillmentEndDao? = null,
-  val purpose: String? = null,
   val customer: CustomerDao? = null,
   val tags: Map<String, String>? = null
 )

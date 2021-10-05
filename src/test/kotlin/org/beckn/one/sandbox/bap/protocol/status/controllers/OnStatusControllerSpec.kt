@@ -57,7 +57,7 @@ internal class OnStatusControllerSpec @Autowired constructor(
         }
 
         it("should save on status response in db") {
-          onStatusResponseRepo.findByMessageId(onStatusResponse.context.messageId).size shouldBeExactly 1
+          onStatusResponseRepo.findByMessageId(onStatusResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 

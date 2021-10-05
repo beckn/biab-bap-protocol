@@ -64,7 +64,7 @@ internal class OnCancelCallbackControllerSpec @Autowired constructor(
         }
 
         it("should save on cancel response in db") {
-          onCancelResponseRepo.findByMessageId(onCancelResponse.context.messageId).size shouldBeExactly 1
+          onCancelResponseRepo.findByMessageId(onCancelResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 

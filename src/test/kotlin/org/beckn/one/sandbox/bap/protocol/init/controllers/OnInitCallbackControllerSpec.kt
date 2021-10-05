@@ -42,7 +42,7 @@ internal class OnInitCallbackControllerSpec @Autowired constructor(
   val onInitResponse = ProtocolOnInit(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnInitMessage(
-      initialized = ProtocolOnInitMessageInitializedFactory.create(1, 2)
+      order = ProtocolOnInitMessageInitializedFactory.create(1, 2)
     )
   )
 
@@ -64,7 +64,7 @@ internal class OnInitCallbackControllerSpec @Autowired constructor(
         }
 
         it("should save on init response in db") {
-          onInitResponseRepo.findByMessageId(onInitResponse.context.messageId).size shouldBeExactly 1
+          onInitResponseRepo.findByMessageId(onInitResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 

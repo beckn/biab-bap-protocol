@@ -85,7 +85,7 @@ internal class PollOnInitResponseControllerSpec @Autowired constructor(
           val body = results.response.contentAsString
           val response: List<ProtocolOnInit> = mapper.readValue(body)
           response.size shouldBeExactly 2
-          response.forEach { it.context.bppId shouldBe entityContext.bppId }
+          response.forEach { it.context!!.bppId shouldBe entityContext.bppId }
         }
       }
 

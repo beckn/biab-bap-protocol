@@ -28,9 +28,9 @@ class OnTrackResponseMapperSpec @Autowired constructor(
   )
 
   private val entityResponse = OnTrackDao(
-    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context),
+    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context!!),
     message = OnTrackMessageDao(
-      ProtocolOnTrackMessageTrackingFactory.createAsEntity(protocolResponse.message?.tracking)
+      ProtocolOnTrackMessageTrackingFactory.createAsEntity(protocolResponse.message.tracking)
     )
   )
 

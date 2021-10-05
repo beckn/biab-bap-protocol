@@ -36,7 +36,7 @@ class SignatureVerificationInterceptor @Autowired constructor(
   private fun verify(request: HttpServletRequest, authorization: Authorization?): Boolean? {
     return authorization?.let {
       val b64PublicKey = getBase64PublicKey(it) ?: return false
-      val requestBytes = StreamUtils.copyToByteArray(request.inputStream);
+      val requestBytes = StreamUtils.copyToByteArray(request.inputStream)
       return it.isNotExpired()  && Cryptic.verify(it, b64PublicKey, String(requestBytes))
     }
   }

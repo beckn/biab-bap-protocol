@@ -66,7 +66,7 @@ internal class OnTrackControllerSpec @Autowired constructor(
         }
 
         it("should save on track response in db") {
-          onTrackResponseRepo.findByMessageId(onTrackResponse.context.messageId).size shouldBeExactly 1
+          onTrackResponseRepo.findByMessageId(onTrackResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 

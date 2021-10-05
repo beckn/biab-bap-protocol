@@ -64,7 +64,7 @@ internal class OnConfirmCallbackControllerSpec @Autowired constructor(
         }
 
         it("should save on confirm response in db") {
-          onConfirmResponseRepo.findByMessageId(onConfirmResponse.context.messageId).size shouldBeExactly 1
+          onConfirmResponseRepo.findByMessageId(onConfirmResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 

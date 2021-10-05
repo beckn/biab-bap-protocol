@@ -28,9 +28,9 @@ class OnSelectResponseMapperSpec @Autowired constructor(
   )
 
   private val entityResponse = OnSelectDao(
-    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context),
+    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context!!),
     message = OnSelectMessageDao(
-      ProtocolOnSelectMessageSelectedFactory.createAsEntity(protocolResponse.message?.selected)
+      ProtocolOnSelectMessageSelectedFactory.createAsEntity(protocolResponse.message?.order)
     )
   )
   init {

@@ -62,7 +62,7 @@ internal class OnSearchCallbackControllerSpec @Autowired constructor(
         }
 
         it("should save search response in db") {
-          searchResponseRepo.findByMessageId(schemaSearchResponse.context.messageId).size shouldBeExactly 1
+          searchResponseRepo.findByMessageId(schemaSearchResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 
