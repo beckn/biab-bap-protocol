@@ -38,9 +38,7 @@ object ProtocolFulfillmentFactory {
     customer = ProtocolCustomer(
       person = ProtocolPersonFactory.create()
     ),
-    provider_id = ProtocolProvider(
-      id = ProtocolProviderFactory.create(id).id,
-      category_id = ProtocolCategoryFactory.create(ProtocolProviderFactory.create(id).id!!).id)
+    provider_id = ProtocolProvider(id= ProtocolProviderFactory.create(id).id)
   )
 
   fun createAsEntity(protocol: ProtocolFulfillment?) = protocol?.let {
