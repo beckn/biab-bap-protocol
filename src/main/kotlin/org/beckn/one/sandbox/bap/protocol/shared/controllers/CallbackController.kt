@@ -21,11 +21,11 @@ open class AbstractCallbackController<Protocol: ProtocolResponse> @Autowired con
         log.error("Error during persisting. Error: {}", it)
         ResponseEntity
           .status(it.status().value())
-          .body(ProtocolAckResponse(callBackActionResponse.context, it.message(), it.error()))
+          .body(ProtocolAckResponse(null, it.message(), it.error()))
       },
       ifRight = {
         log.info("Successfully persisted response with message id: ${callBackActionResponse.context?.messageId}")
-        ResponseEntity.ok(ProtocolAckResponse(callBackActionResponse.context, ResponseMessage.ack()))
+        ResponseEntity.ok(ProtocolAckResponse(null, ResponseMessage.ack()))
       }
     )
 }

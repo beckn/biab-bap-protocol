@@ -28,9 +28,9 @@ class OnInitResponseMapperSpec @Autowired constructor(
   )
 
   private val entityResponse = OnInitDao(
-    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context),
+    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context!!),
     message = OnInitMessageDao(
-      initialized = ProtocolOnInitMessageInitializedFactory.createAsEntity(protocolResponse.message?.initialized)
+      order = ProtocolOnInitMessageInitializedFactory.createAsEntity(protocolResponse.message?.order)
     )
   )
 

@@ -47,11 +47,11 @@ class CachedBodyHttpServletRequest(request: HttpServletRequest) : HttpServletReq
 class CachedBodyServletInputStream(cachedBody: ByteArray) : ServletInputStream() {
   private val cachedBodyInputStream: InputStream = ByteArrayInputStream(cachedBody)
   override fun read(): Int {
-    return cachedBodyInputStream.read();
+    return cachedBodyInputStream.read()
   }
 
   override fun isFinished(): Boolean {
-    return cachedBodyInputStream.available() == 0;
+    return cachedBodyInputStream.available() == 0
   }
 
   override fun isReady(): Boolean = true

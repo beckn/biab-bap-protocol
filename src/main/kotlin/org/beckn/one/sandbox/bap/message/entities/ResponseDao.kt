@@ -35,7 +35,7 @@ data class OnInitDao @Default constructor(
 ) : BecknResponseDao
 
 data class OnInitMessageDao @Default constructor(
-  val initialized: OnInitMessageInitializedDao? = null
+  val order: OnInitMessageInitializedDao? = null
 )
 
 data class OnConfirmDao @Default constructor(

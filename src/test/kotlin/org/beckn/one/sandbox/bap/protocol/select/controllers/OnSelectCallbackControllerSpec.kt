@@ -41,7 +41,7 @@ internal class OnSelectCallbackControllerSpec @Autowired constructor(
   val onSelectResponse = ProtocolOnSelect(
     context = ProtocolContextFactory.fixed,
     message = ProtocolOnSelectMessage(
-      selected = ProtocolOnSelectMessageSelectedFactory.create(1, 2)
+      order = ProtocolOnSelectMessageSelectedFactory.create(1, 2)
     )
   )
 
@@ -63,7 +63,7 @@ internal class OnSelectCallbackControllerSpec @Autowired constructor(
         }
 
         it("should save on select response in db") {
-          onSelectResponseRepo.findByMessageId(onSelectResponse.context.messageId).size shouldBeExactly 1
+          onSelectResponseRepo.findByMessageId(onSelectResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 

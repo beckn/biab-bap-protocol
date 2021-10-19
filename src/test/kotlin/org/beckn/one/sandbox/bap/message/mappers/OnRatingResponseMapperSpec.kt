@@ -28,7 +28,7 @@ class OnRatingResponseMapperSpec @Autowired constructor(
   )
 
   private val entityResponse = OnRatingDao(
-    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context),
+    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context!!),
     message = OnRatingMessageDao(
       ProtocolOnRatingMessageFeedbackFactory.createAsEntity(protocolResponse.message?.feedback)
     )

@@ -21,7 +21,7 @@ data class ContextDao @Default constructor(
   @JsonIgnore val clock: Clock = Clock.systemUTC(),
   val timestamp: OffsetDateTime = OffsetDateTime.now(clock),
   val key: String? = null,
-  val ttl: Duration? = null
+  val ttl: String? = null
 ) {
   enum class Action(val value: String) {
     @JsonProperty("search") SEARCH("search"),
@@ -32,7 +32,7 @@ data class ContextDao @Default constructor(
     @JsonProperty("status") STATUS("status"),
     @JsonProperty("track") TRACK("track"),
     @JsonProperty("cancel") CANCEL("cancel"),
-    @JsonProperty("feedback") FEEDBACK("feedback"),
+    @JsonProperty("rating") RATING("rating"),
     @JsonProperty("support") SUPPORT("support"),
     @JsonProperty("on_search") ON_SEARCH("on_search"),
     @JsonProperty("on_select") ON_SELECT("on_select"),
@@ -43,8 +43,7 @@ data class ContextDao @Default constructor(
     @JsonProperty("on_track") ON_TRACK("on_track"),
     @JsonProperty("on_cancel") ON_CANCEL("on_cancel"),
     @JsonProperty("on_feedback") ON_FEEDBACK("on_feedback"),
-    @JsonProperty("on_support") ON_SUPPORT("on_support"),
-    @JsonProperty("ack") ACK("ack")
+    @JsonProperty("on_support") ON_SUPPORT("on_support")
   }
 }
 

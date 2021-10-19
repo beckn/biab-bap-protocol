@@ -53,7 +53,7 @@ internal class PollOnRatingResponseControllerSpec @Autowired constructor(
   private val entityContext = ContextDao(
     domain = "LocalRetail",
     country = "IN",
-    action = ContextDao.Action.FEEDBACK,
+    action = ContextDao.Action.RATING,
     city = "Pune",
     coreVersion = "0.9.1-draft03",
     bapId = "http://host.bap.com",
@@ -89,7 +89,7 @@ internal class PollOnRatingResponseControllerSpec @Autowired constructor(
           val body = results.response.contentAsString
           val response: List<ProtocolOnRating> = mapper.readValue(body)
           response.size shouldBeExactly 2
-          response.forEach { it.context.bppId shouldBe entityContext.bppId }
+          response.forEach { it.context!!.bppId shouldBe entityContext.bppId }
         }
       }
 

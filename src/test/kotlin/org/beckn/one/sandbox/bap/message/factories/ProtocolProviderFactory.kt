@@ -15,7 +15,8 @@ object ProtocolProviderFactory {
         ProtocolLocationFactory.cityLocation(1),
         ProtocolLocationFactory.cityLocation(2).copy(city = ProtocolCityFactory.pune)
       ),
-      tags = mapOf("key 1" to "value 1")
+      tags = mapOf("key 1" to "value 1"),
+      category_id = ProtocolCategoryFactory.create(providerId).id
     )
   }
 

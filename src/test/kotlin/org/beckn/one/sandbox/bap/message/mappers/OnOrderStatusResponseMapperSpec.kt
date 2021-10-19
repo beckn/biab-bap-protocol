@@ -28,7 +28,7 @@ class OnOrderStatusResponseMapperSpec @Autowired constructor(
   )
 
   private val entityResponse = OnOrderStatusDao(
-    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context),
+    context = ProtocolContextFactory.fixedAsEntity(protocolResponse.context!!),
     message = OnOrderStatusMessageDao(
       ProtocolOrderFactory.createAsEntity(protocolResponse.message?.order)
     )

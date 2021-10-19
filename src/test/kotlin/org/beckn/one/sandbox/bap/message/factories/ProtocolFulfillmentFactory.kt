@@ -37,7 +37,7 @@ object ProtocolFulfillmentFactory {
     ),
     customer = ProtocolCustomer(
       person = ProtocolPersonFactory.create()
-    )
+    ),
   )
 
   fun createAsEntity(protocol: ProtocolFulfillment?) = protocol?.let {

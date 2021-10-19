@@ -63,7 +63,7 @@ internal class OnRatingControllerSpec @Autowired constructor(
         }
 
         it("should save on rating response in db") {
-          onRatingResponseRepo.findByMessageId(onRatingResponse.context.messageId).size shouldBeExactly 1
+          onRatingResponseRepo.findByMessageId(onRatingResponse.context!!.messageId).size shouldBeExactly 1
         }
       }
 

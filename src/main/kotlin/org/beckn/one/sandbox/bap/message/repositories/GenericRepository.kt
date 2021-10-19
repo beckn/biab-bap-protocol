@@ -30,7 +30,7 @@ class GenericRepository<R : Any>(private val collection: MongoCollection<R>) {
 
   fun insertOne(document: R): R {
     collection.insertOne(document)
-    return document;
+    return document
   }
 
   fun findAll(query: Bson) = collection.find(query).toList()
