@@ -26,7 +26,8 @@ object ProtocolProviderFactory {
       descriptor = ProtocolDescriptorFactory.createAsEntity(protocol.descriptor),
       time = ProtocolTimeFactory.timeAsEntity(protocol.time),
       locations = protocol.locations?.mapNotNull { ProtocolLocationFactory.locationEntity(it) },
-      tags = protocol.tags
+      tags = protocol.tags,
+      category_id = protocol.category_id
     )
   }
 }

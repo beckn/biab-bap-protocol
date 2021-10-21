@@ -11,8 +11,6 @@ data class QuotationDao @Default constructor(
 
 
 data class QuotationBreakupDao @Default constructor(
-  val type: Type? = null,
-  val refId: String? = null,
   val title: String? = null,
   val price: PriceDao? = null
 ) {

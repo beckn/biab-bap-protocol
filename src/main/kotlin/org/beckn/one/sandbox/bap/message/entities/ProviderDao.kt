@@ -7,5 +7,6 @@ data class ProviderDao @Default constructor(
   val descriptor: DescriptorDao? = null,
   val time: TimeDao? = null,
   val locations: List<LocationDao>? = null,
-  val tags: Map<String, String>? = null
+  val tags: Map<String, String>? = null,
+  val category_id :String ?= null
 )

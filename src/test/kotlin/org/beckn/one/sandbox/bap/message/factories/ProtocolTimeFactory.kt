@@ -14,19 +14,19 @@ object ProtocolTimeFactory {
   fun fixedTimestamp(label: String) = ProtocolTime(
     label = label,
     timestamp = OffsetDateTime.now(fixedClock),
-    schedule = ProtocolSchedule("5",listOf(OffsetDateTime.now(fixedClock)),listOf(OffsetDateTime.now(fixedClock)))
+    schedule = null
   )
 
   fun fixedDuration(label: String) = ProtocolTime(
     label = label,
     duration = "5",
-    schedule = ProtocolSchedule("5",listOf(OffsetDateTime.now(fixedClock)))
+    schedule = null
   )
 
   fun fixedDays(label: String) = ProtocolTime(
     label = label,
     days = "3",
-    schedule = ProtocolSchedule("5",listOf(OffsetDateTime.now(fixedClock)))
+    schedule = null
   )
 
   fun fixedRange(label: String) = ProtocolTime(
@@ -35,7 +35,7 @@ object ProtocolTimeFactory {
       start = OffsetDateTime.now(fixedClock),
       end = OffsetDateTime.now(fixedClock).plusDays(2)
     ) ,
-    schedule = ProtocolSchedule("5",listOf(OffsetDateTime.now(fixedClock)))
+    schedule = null
   )
 
   fun timeAsEntity(protocol: ProtocolTime?) = protocol?.let {

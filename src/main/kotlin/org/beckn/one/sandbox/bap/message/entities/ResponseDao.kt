@@ -25,7 +25,7 @@ data class OnSelectDao @Default constructor(
 ) : BecknResponseDao
 
 data class OnSelectMessageDao @Default constructor(
-  val selected: OnSelectMessageSelectedDao? = null
+  val order: OnSelectMessageSelectedDao? = null
 )
 
 data class OnInitDao @Default constructor(
