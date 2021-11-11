@@ -4,17 +4,18 @@ import java.time.Instant
 
 data class Authorization(
   val keyId: String,
-  val algorithm: String = XED25519,
+  val algorithm: String = ED25519,
   val created: Long,
   val expires: Long,
   val headers: String = "(created) (expires) digest",
-  val signature: String
+  val signature: String,
+  val Accept :String = "application/json"
 ) {
 
   fun isNotExpired() = Instant.now().toEpochMilli() / 1000 < expires
 
   val headerString by lazy {
-    """Signature keyId="$keyId" algorithm="$algorithm" created="$created" expires="$expires" headers="$headers" signature="$signature""""
+    """Signature keyId="$keyId",algorithm="$algorithm",created="$created",expires="$expires",headers="$headers",signature="$signature""""
   }
 
   val parseKey by lazy {
@@ -29,15 +30,15 @@ data class Authorization(
     private const val EXPIRES = "expires"
     private const val HEADERS = "headers"
     private const val SIGNATURE = "signature"
-
-    private const val XED25519 = "xed25519"
+    private const val ED25519 = "ed25519"
     const val HEADER_NAME = "Authorization"
+    const val ACCEPT = "Accept"
 
     fun parse(auth: String?): Authorization? {
       return auth?.let { authStr ->
         val authParams = authStr.trim()
           .removePrefix("Signature ")
-          .split("\" ")
+          .split(",")
           .associate {
             val keyValue = it.trim().split("=\"", limit = 2)
             Pair(keyValue[0], keyValue[1].removeSuffix("\""))
@@ -67,7 +68,7 @@ data class Authorization(
                created: Long,
                expires: Long): Authorization {
       return Authorization(
-        keyId = "$subscriberId|$uniqueKeyId|$XED25519",
+        keyId = "$subscriberId|$uniqueKeyId|$ED25519",
         created = created,
         expires =  expires,
         signature = signature
