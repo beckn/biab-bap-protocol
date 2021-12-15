@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 class AuthorizationSpec : DescribeSpec() {
   private val sampleAuthorization = """
-    Signature keyId="MOCK_SUB_ID|key1|xed25519" algorithm="xed25519" created="1627447288" expires="1627450888" headers="(created) (expires) digest" signature="hrEaAq8fpChrKBuevWTRu1dl2evXcoDjuaSPCg+olGXqnR3NA7NyqqQIJJ5m50beEzp/YOAxceATlPEYtaCiDg=="
+    Signature keyId="MOCK_SUB_ID|key1|ed25519",algorithm="ed25519",created="1627447288",expires="1627450888",headers="(created) (expires) digest",signature="hrEaAq8fpChrKBuevWTRu1dl2evXcoDjuaSPCg+olGXqnR3NA7NyqqQIJJ5m50beEzp/YOAxceATlPEYtaCiDg=="
   """.trimIndent()
 
   init {
@@ -14,7 +14,7 @@ class AuthorizationSpec : DescribeSpec() {
         it("should parse given authorization header") {
           val authorization = Authorization.parse(sampleAuthorization)
           authorization shouldBe Authorization(
-            keyId = "MOCK_SUB_ID|key1|xed25519",
+            keyId = "MOCK_SUB_ID|key1|ed25519",
             created = 1627447288,
             expires = 1627450888,
             signature = "hrEaAq8fpChrKBuevWTRu1dl2evXcoDjuaSPCg+olGXqnR3NA7NyqqQIJJ5m50beEzp/YOAxceATlPEYtaCiDg=="
