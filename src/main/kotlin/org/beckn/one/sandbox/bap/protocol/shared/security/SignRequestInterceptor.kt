@@ -23,6 +23,7 @@ class SignRequestInterceptor @Autowired constructor(
     val authorization = createAuthorization(original)
     val request = original.newBuilder()
       .header(Authorization.HEADER_NAME, authorization.headerString)
+      .header(Authorization.ACCEPT,authorization.Accept)
       .build()
     return chain.proceed(request)
   }
