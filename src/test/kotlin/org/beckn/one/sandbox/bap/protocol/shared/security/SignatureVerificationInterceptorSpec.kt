@@ -83,8 +83,8 @@ class SignatureVerificationInterceptorSpec(
           responseEntity.statusCode.value() shouldBe 401
         }
 
-        it("should set Proxy-Authenticate header") {
-          responseEntity.headers["Proxy-Authenticate"] shouldNot beNull()
+        it("should set WWW-Authenticate header") {
+          responseEntity.headers["WWW-Authenticate"] shouldNot beNull()
         }
 
         it("should send nack in body") {
@@ -94,7 +94,7 @@ class SignatureVerificationInterceptorSpec(
 
       context("when request has valid Authorization header") {
         val authorization = signRequest(requestBody)
-        val request = createRequest(requestBody, "Proxy-Authorization", authorization.headerString)
+        val request = createRequest(requestBody, "Authorization", authorization.headerString)
         val responseEntity = restTemplate
           .postForEntity("http://localhost:$port/protocol/v1/on_search", request, String::class.java)
 
