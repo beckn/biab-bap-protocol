@@ -23,15 +23,15 @@ database:
     url: mongodb://{{ mongo_host }}:{{ mongo_port }}
     name: {{ bap_mongo_name }}
 registry_service:
-  url: https://demo4460370.mockable.io/registry/
+  url: {{ registry_url }}
   retry:
     max_attempts: 3
     initial_interval_in_millis: 1000
     interval_multiplier: 1.0
 bpp_registry_service:
-  url: https://demo4460370.mockable.io/bpp_registry/
+  url: {{ registry_url }}
 beckn:
-  security.enabled: false
+  security.enabled: true
 security:
   self:
     private_key: {{ private_key }}
