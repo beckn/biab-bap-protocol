@@ -21,6 +21,8 @@ class SignatureVerificationInterceptor @Autowired constructor(
   override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
     val authHeaderName = getAuthHeaderName(request)
     val authorization = Authorization.parse(request.getHeader(authHeaderName))
+    log.info("Signature verification Request Header Name  : $authHeaderName")
+    log.info("Signature verification Authorization Request : ${request.getHeader(authHeaderName)}")
     val isValid = verify(request, authorization) ?: false
     if (!isValid) {
       log.error("Signature verification failed for header: $authHeaderName")
@@ -36,6 +38,7 @@ class SignatureVerificationInterceptor @Autowired constructor(
   private fun verify(request: HttpServletRequest, authorization: Authorization?): Boolean? {
     return authorization?.let {
       val b64PublicKey = getBase64PublicKey(it) ?: return false
+      log.info("Signature verification Lookup Registry PublicKey", b64PublicKey)
       val requestBytes = StreamUtils.copyToByteArray(request.inputStream)
       return it.isNotExpired()  && Cryptic.verify(it, b64PublicKey, String(requestBytes))
     }
