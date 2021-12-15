@@ -83,8 +83,6 @@ class SignatureVerificationInterceptorSpec(
           responseEntity.statusCode.value() shouldBe 401
         }
 
-        it("should set Proxy-Authenticate header") {
-          responseEntity.headers["Proxy-Authenticate"] shouldNot beNull()
         it("should set WWW-Authenticate header") {
           responseEntity.headers["WWW-Authenticate"] shouldNot beNull()
         }
