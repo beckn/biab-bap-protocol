@@ -28,6 +28,7 @@ class SignRequestInterceptor @Autowired constructor(
     log.info("Auth recreated signing string : ", authorization.signature)
     val request = original.newBuilder()
       .header(Authorization.HEADER_NAME, authorization.headerString)
+      .header(Authorization.ACCEPT,authorization.Accept)
       .build()
     return chain.proceed(request)
   }
