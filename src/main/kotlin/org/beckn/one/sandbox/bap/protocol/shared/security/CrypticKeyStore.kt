@@ -16,8 +16,13 @@ interface CrypticKeyStore {
 class ConfigFileKeyStore @Autowired constructor(
   private val env: Environment
 ) : CrypticKeyStore {
-  override fun getBase64PublicKey(subscriberId: String, keyId: String): String =
-    env.getRequiredProperty("subscribers.public_keys.$subscriberId.$keyId")
+  override fun getBase64PublicKey(subscriberId: String, keyId: String): String {
+    return try {
+      env.getRequiredProperty("subscribers.public_keys.$subscriberId.$keyId")
+    }catch ( e: Exception){
+      ""
+    }
+  }
 }
 
 @Component
