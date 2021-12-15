@@ -5,6 +5,8 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
 import okio.Buffer
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -18,9 +20,12 @@ class SignRequestInterceptor @Autowired constructor(
   @Value("\${context.ttl_seconds}") private val ttlInSeconds: String,
 ) : Interceptor {
 
+  private val log: Logger = LoggerFactory.getLogger(this::class.java)
+
   override fun intercept(chain: Interceptor.Chain): Response {
     val original = chain.request()
     val authorization = createAuthorization(original)
+    log.info("Auth recreated signing string : ", authorization.signature)
     val request = original.newBuilder()
       .header(Authorization.HEADER_NAME, authorization.headerString)
       .header(Authorization.ACCEPT,authorization.Accept)
@@ -39,6 +44,8 @@ class SignRequestInterceptor @Autowired constructor(
     val created = now.epochSecond
     val expires = now.plusSeconds(ttlInSeconds.toLong()).epochSecond
     val bodyContent = getBodyContent(request.body()!!)
+    log.info("Create Auth with body content : ", bodyContent)
+
     return Authorization.create(
       subscriberId = subscriberId,
       uniqueKeyId = uniqueKeyId,
@@ -46,8 +53,6 @@ class SignRequestInterceptor @Autowired constructor(
       created = created,
       expires = expires
     )
-
   }
-
 
 }
