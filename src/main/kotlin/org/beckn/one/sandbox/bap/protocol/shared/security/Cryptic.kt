@@ -5,10 +5,14 @@ import org.bouncycastle.crypto.params.Ed25519PrivateKeyParameters
 import org.bouncycastle.crypto.params.Ed25519PublicKeyParameters
 import org.bouncycastle.crypto.signers.Ed25519Signer
 import org.bouncycastle.jcajce.provider.digest.Blake2b
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.security.MessageDigest
 import java.util.*
 
 object Cryptic {
+
+  private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
   fun sign(
     b64PrivateKey: String,
@@ -29,6 +33,7 @@ object Cryptic {
   ): Boolean {
     val signer = getEd25519SignerForVerification(b64PublicKey)
     val formattedRequest = formatBodyForSigning(authorization.created, authorization.expires, requestBody)
+    log.info("Signature verification Signing body : $formattedRequest")
     signer.update(formattedRequest.toByteArray(), 0, formattedRequest.length)
     return signer.verifySignature(Base64.getDecoder().decode(authorization.signature))
   }

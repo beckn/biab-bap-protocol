@@ -40,6 +40,7 @@ class SignatureVerificationInterceptor @Autowired constructor(
       val b64PublicKey = getBase64PublicKey(it) ?: return false
       log.info("Signature verification Lookup Registry PublicKey", b64PublicKey)
       val requestBytes = StreamUtils.copyToByteArray(request.inputStream)
+      log.info("Signature verification Request body: ", String(requestBytes))
       return it.isNotExpired()  && Cryptic.verify(it, b64PublicKey, String(requestBytes))
     }
   }
