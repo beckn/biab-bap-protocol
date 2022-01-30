@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory
 interface ResponseStorageService<Proto : ProtocolResponse> {
   fun save(protoResponse: Proto): Either<DatabaseError.OnWrite, Proto>
   fun findByMessageId(id: String): Either<DatabaseError.OnRead, List<Proto>>
+  fun findByOrderId(id: String): Either<DatabaseError.OnRead, List<Proto>>
 }
 
 class ResponseStorageServiceImpl<Proto : ProtocolResponse, Entity : BecknResponseDao> constructor(
@@ -44,5 +45,14 @@ class ResponseStorageServiceImpl<Proto : ProtocolResponse, Entity : BecknRespons
 
   private fun toSchema(allResponses: List<Entity>) =
     allResponses.map { response -> mapper.entityToProtocol(response) }
+
+  override fun findByOrderId(id: String): Either<DatabaseError.OnRead, List<Proto>> = Either
+  .catch { responseRepo.findByOrderId(id) }
+  .map {
+    toSchema(it) }
+  .mapLeft { e ->
+    log.error("Exception while fetching search response", e)
+    DatabaseError.OnRead
+  }
 
 }
