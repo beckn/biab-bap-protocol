@@ -48,7 +48,7 @@ dependencies {
   implementation("io.arrow-kt:arrow-optics:0.13.2")
   implementation("org.litote.kmongo:kmongo:4.2.8")
   implementation("org.mapstruct:mapstruct:1.4.2.Final")
-  implementation("org.beckn.jvm:beckn-protocol-dtos:0.9.3.20")
+  implementation("org.beckn.jvm:beckn-protocol-dtos:0.9.3.+")
   implementation("org.bouncycastle:bcprov-jdk15on:1.69")
   implementation("commons-codec:commons-codec:1.15")
   implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
