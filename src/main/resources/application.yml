@@ -19,13 +19,13 @@ database:
     name: ${DATABASE_NAME:bap}
 
 registry_service:
-  url: ${REGISTRY_URL:https://demo4460370.mockable.io/registry/}
+  url: ${REGISTRY_URL:https://beckn-one.succinct.in/subscribers/}
   retry:
     max_attempts: ${REGISTRY_RETRY_MAX_ATTEMPTS:3}
     initial_interval_in_millis: ${REGISTRY_RETRY_INTERVAL:1000}
     interval_multiplier: ${REGISTRY_RETRY_INTERVAL_MULTIPLIER:1.0}
 bpp_registry_service:
-  url: ${BPP_URL:https://demo4460370.mockable.io/bpp_registry/}
+  url: ${BPP_URL:https://beckn-one.succinct.in/subscribers/}
 
 context:
   domain: ${BAP_DOMAIN:nic2004:52110}
