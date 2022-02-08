@@ -20,4 +20,10 @@ open class PollForResponseService<Protocol: ProtocolResponse> constructor(
     return responseStorageService.findByMessageId(messageId)
   }
 
+  open fun findResponsesByOrderId(messageId: String): Either<HttpError, List<Protocol>> {
+    log.info("Got fetch request for order id: {}", messageId)
+    return responseStorageService.findByOrderId(messageId)
+  }
+
+
 }

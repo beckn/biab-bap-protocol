@@ -15,8 +15,11 @@ class PollOrderStatusResponseController @Autowired constructor(
   contextFactory: ContextFactory
 ) : AbstractPollForResponseController<ProtocolOnOrderStatus>(responseService, contextFactory) {
 
+  @GetMapping("protocol/response/v1/on_order_status")
+  @ResponseBody
+  fun getStatusResponseById(orderId: String) = findResponsesByOrderId(orderId)
+
   @GetMapping("protocol/response/v1/on_status")
   @ResponseBody
   fun getOrderStatusResponses(messageId: String) = findResponses(messageId)
-
 }
