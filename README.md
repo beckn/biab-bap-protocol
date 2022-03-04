@@ -1,6 +1,6 @@
 # Beckn-In-A-Box BAP Protocol
 
-> **Disclaimer:** This project is still in beta phase. Ustable for Production Use
+> **Disclaimer:** This project is still in beta phase. Unstable for Production Use
 
 Provides BAP Protocol APIs for Beckn-In-A-Box
 
