@@ -66,4 +66,8 @@ class DatabaseConfiguration @Autowired constructor(
   @Bean
   fun onOrderStatusResponseRepo(@Autowired database: MongoDatabase): BecknResponseRepository<OnOrderStatusDao> =
     BecknResponseRepository(database.getCollectionOfName("on_order_status"))
+
+  @Bean
+  fun onCancellationReasonsResponseRepo(@Autowired database: MongoDatabase): BecknResponseRepository<OnCancellationReasonDao> =
+    BecknResponseRepository(database.getCollectionOfName("on_cancellation_reasons"))
 }
