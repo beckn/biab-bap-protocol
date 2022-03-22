@@ -30,4 +30,21 @@ open class AbstractPollForResponseController<Protocol: ProtocolResponse>(
         ResponseEntity.ok(it)
       }
     )
+
+  fun findResponsesByOrderId(
+    orderId: String
+  ): ResponseEntity<List<ProtocolResponse>> = responseService
+    .findResponsesByOrderId(orderId)
+    .fold(
+      {
+        log.error("Error when finding search response by message id. Error: {}", it)
+        ResponseEntity
+          .status(it.status().value())
+          .body(listOf(ProtocolErrorResponse(context = contextFactory.create(), error = it.error())))
+      },
+      {
+        log.info("Found responses for order {}", orderId)
+        ResponseEntity.ok(it)
+      }
+    )
 }
