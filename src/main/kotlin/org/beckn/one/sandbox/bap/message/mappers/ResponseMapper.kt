@@ -125,3 +125,14 @@ interface OnOrderStatusResponseMapper : GenericResponseMapper<ProtocolOnOrderSta
   override fun entityToProtocol(entity: OnOrderStatusDao): ProtocolOnOrderStatus
   override fun protocolToEntity(schema: ProtocolOnOrderStatus): OnOrderStatusDao
 }
+
+@Mapper(
+  componentModel = "spring",
+  unmappedTargetPolicy = ReportingPolicy.WARN,
+  injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+  uses = [DateMapper::class]
+)
+interface OnCancellationReasonResponseMapper : GenericResponseMapper<ProtocolOnCancellationReasons, OnCancellationReasonDao> {
+  override fun entityToProtocol(entity: OnCancellationReasonDao): ProtocolOnCancellationReasons
+  override fun protocolToEntity(schema: ProtocolOnCancellationReasons): OnCancellationReasonDao
+}

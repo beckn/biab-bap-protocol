@@ -1,6 +1,8 @@
 package org.beckn.one.sandbox.bap.message.entities
 
 import org.beckn.protocol.schemas.Default
+import org.beckn.protocol.schemas.ProtocolDescriptor
+import java.time.LocalDateTime
 
 
 interface BecknResponseDao {
@@ -86,6 +88,12 @@ data class OnCancelDao @Default constructor(
   override val error: ErrorDao? = null
 ) : BecknResponseDao
 
+data class OnCancellationReasonDao @Default constructor(
+  override val context: ContextDao,
+  val message: OnCancellationReasonsMessageDao? = null,
+  override val error: ErrorDao? = null
+) : BecknResponseDao
+
 data class OnCancelMessageDao @Default constructor(
   val order: OrderDao? = null
 )
@@ -98,4 +106,23 @@ data class OnOrderStatusDao @Default constructor(
 
 data class OnOrderStatusMessageDao @Default constructor(
   val order: OrderDao? = null
+)
+
+data class OnCancellationReasonsMessageDao @Default constructor(
+  val cancellationReasons: List<OnCancellationReasonsDescripterDao>? = null,
+  val ratingCategories: List<OnRatingCategoryDao>? = null
+)
+
+data class OnCancellationReasonsDescripterDao @Default constructor(
+  val id: String? = null,
+  val descriptor: DescriptorDao? = null
+)
+
+data class OnRatingCategoryDao @Default constructor(
+   val id: String,
+   val parentCategoryId: String? = null,
+   val descriptor: DescriptorDao,
+   val time: LocalDateTime? = null,
+   val tags: Map<String, String>? = null,
+   val question: String? = null
 )
