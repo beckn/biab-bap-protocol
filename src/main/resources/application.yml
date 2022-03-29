@@ -15,7 +15,7 @@ spring:
 
 database:
   mongo:
-    url: ${DATABASE_URL:mongodb://localhost:27017}
+    url: ${DATABASE_URL:mongodb://mongo:27017}
     name: ${DATABASE_NAME:sandbox_bap}
 
 registry_service:
