@@ -3,5 +3,5 @@ var: this
 mongo_host: 10.0.1.10
 mongo_port: 27017
 bap_mongo_name: sandbox_bap
-registry_url: https://pilot-gateway-1.beckn.nsdl.co.in/
+registry_url: https://registry.becknprotocol.io/subscribers/
 public_key: X+jgcPXHD4kFzvcbb3eaxWRA5UwB8Mm6IykeTPADofU=
